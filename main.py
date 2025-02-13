@@ -23,7 +23,18 @@ def get_slot_machine_spin(rows,cols,sybmols):
         for _ in range(symbol_count):
             all_symbols.append(symbol)
             
-    columns = [[],[],[]]
+    columns = []
+    for _ in range(cols):
+        column = []
+        current_symbols = all_symbols[:]
+        for _ in range(rows):
+            value = random.choice(current_symbols)
+            current_symbols.remove(value)
+            column.append(value)
+            
+        columns.append(column)
+        
+    return columns
 
 # Function to deposit money
 def deposit():
@@ -67,7 +78,10 @@ def getBet():
         else:
             print("Please enter a valid number.")
             
-    return amount   
+    return amount
+
+def print_slot_machine(columns):
+    pass
 
 # Main function
 def main():
@@ -80,7 +94,7 @@ def main():
             print(f"You don't have enough to bet on. UYour balance is Rs.{balance}.")
         else:
             break
-    print(f"You are betting ${bet} on {lines} lines. Total bet = Rs. {totalBet}")
+    print(f"You are betting ${bet} on {lines} lines. Total bet = Rs.{totalBet}")
     print("Balance: Rs.", balance, "Lines: ", lines)
 
 main()
