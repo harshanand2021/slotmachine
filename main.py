@@ -112,14 +112,14 @@ def print_slot_machine(columns):
                 print(column[row], end=" ")
                 
         print()
-
-# Main function
-def main():
-    balance = deposit()
+        
+# Adding a game function
+def game(balance):
     lines = get_number_of_lines()
     while True:
         bet = getBet()
         totalBet = bet * lines
+        
         if totalBet > balance:
             print(f"You don't have enough to bet on. Your balance is Rs.{balance}.")
         else:
@@ -133,5 +133,19 @@ def main():
     winnings, winning_lines = check_winnings(slots, lines, bet, symbol_count)
     print(f"You won {winnings}!")
     print(f"You won on lines : ", *winning_lines)
+    
+    return winnings - totalBet
+
+# Main function
+def main():
+    balance = deposit()
+    while True:
+        print(f"Current balance is - Rs.{balance}")
+        spin = input("Press Enter to spin (Q to Quit).")
+        if(spin == "Q" or spin == "q"):
+            break
+        balance += game(balance)
+        
+    print(f"You're left with - Rs.{balance}")
 
 main()
