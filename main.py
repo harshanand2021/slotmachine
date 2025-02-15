@@ -3,8 +3,8 @@ import random
 
 # Declaring a constant
 MAX_LINES = 5
-MAX_BET = 1000
-MIN_BET = 100
+MAX_BET = 10000 # Maximum bet amount
+MIN_BET = 100 # Minimum bet amount
 
 # Specifying the number of rows
 ROWS = 3
@@ -89,7 +89,14 @@ def getBet():
     return amount
 
 def print_slot_machine(columns):
-    pass
+    for row in range(len(columns[0])):
+        for i, column in enumerate(columns):
+            if i != len(columns) - 1:
+                print(column[row], end=" | ")
+            else:
+                print(column[row], end=" ")
+                
+        print()
 
 # Main function
 def main():
@@ -98,8 +105,8 @@ def main():
     while True:
         bet = getBet()
         totalBet = bet * lines
-        if totalBet < balance:
-            print(f"You don't have enough to bet on. UYour balance is Rs.{balance}.")
+        if totalBet > balance:
+            print(f"You don't have enough to bet on. Your balance is Rs.{balance}.")
         else:
             break
     print(f"You are betting ${bet} on {lines} lines. Total bet = Rs.{totalBet}")
